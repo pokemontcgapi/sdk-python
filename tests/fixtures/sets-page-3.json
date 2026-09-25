@@ -1,0 +1,36 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\"sets-3-gzip\"",
+    "x-request-id": "0000000000000000000000000000000d",
+    "x-credits-cost": "1",
+    "x-quota-remaining": "787"
+  },
+  "body": {
+    "data": [
+      {
+        "id": "m2",
+        "code": "m2",
+        "slug": "mega-brave",
+        "legacy_id": null,
+        "name": "Mega Brave",
+        "series": null,
+        "region": "JP",
+        "release_date": "2025-12-05",
+        "total": 100,
+        "printed_total": null,
+        "ptcgo_code": null,
+        "symbol_url": null,
+        "logo_url": "https://media.rarebit.app/sets/m2/logo-normal.webp",
+        "updated_at": "2026-08-26T17:47:39.900Z"
+      }
+    ],
+    "meta": {
+      "limit": 2,
+      "count": 1,
+      "total_count": 5,
+      "has_more": false
+    }
+  }
+}

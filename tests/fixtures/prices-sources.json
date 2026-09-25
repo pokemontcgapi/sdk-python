@@ -1,0 +1,56 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "public, max-age=86400",
+    "x-request-id": "0f06968fd2f116b804009dc2037d6ec4",
+    "etag": "W/\"sdvtFXi9UgExho1er1D-ck8KEOi-gzip\""
+  },
+  "body": {
+    "data": [
+      {
+        "source": "CARDMARKET",
+        "label": "Cardmarket",
+        "min_delay_hours": 24,
+        "is_own": false
+      },
+      {
+        "source": "CARDTRADER",
+        "label": "CardTrader",
+        "min_delay_hours": 24,
+        "is_own": false
+      },
+      {
+        "source": "COMMUNITY",
+        "label": "Community-observed",
+        "min_delay_hours": 0,
+        "is_own": false
+      },
+      {
+        "source": "EBAY",
+        "label": "eBay",
+        "min_delay_hours": 24,
+        "is_own": false
+      },
+      {
+        "source": "PRICECHARTING",
+        "label": "PriceCharting",
+        "min_delay_hours": 24,
+        "is_own": false
+      },
+      {
+        "source": "PTCG_INDEX",
+        "label": "pokemontcgapi composite index",
+        "min_delay_hours": 0,
+        "is_own": true
+      },
+      {
+        "source": "TCGPLAYER",
+        "label": "TCGplayer",
+        "min_delay_hours": 24,
+        "is_own": false
+      }
+    ],
+    "count": 7
+  }
+}

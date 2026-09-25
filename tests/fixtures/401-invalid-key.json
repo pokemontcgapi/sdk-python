@@ -1,0 +1,15 @@
+{
+  "status": 401,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "INVALID_API_KEY",
+    "x-request-id": "00000000000000000000000000000008"
+  },
+  "body": {
+    "error": {
+      "code": "INVALID_API_KEY",
+      "message": "The API key is not valid.",
+      "request_id": "00000000000000000000000000000008"
+    }
+  }
+}

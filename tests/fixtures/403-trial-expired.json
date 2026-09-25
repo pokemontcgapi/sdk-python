@@ -1,0 +1,24 @@
+{
+  "status": 403,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "TRIAL_EXPIRED",
+    "x-request-id": "00000000000000000000000000000003"
+  },
+  "body": {
+    "error": {
+      "code": "TRIAL_EXPIRED",
+      "message": "The trial ended.",
+      "request_id": "00000000000000000000000000000003",
+      "details": {
+        "next_step": {
+          "action": "subscribe",
+          "actor": "account_owner",
+          "plans_url": "https://example.test/pricing",
+          "checkout_url": "https://example.test/subscribe?plan=developer&interval=monthly",
+          "handoff": "The account owner needs to open https://example.test/subscribe?plan=developer&interval=monthly."
+        }
+      }
+    }
+  }
+}

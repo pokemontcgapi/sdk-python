@@ -1,0 +1,29 @@
+name: Publish
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Tag must match the package version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          version=$(python -c "import re, pathlib; print(re.search(r'\"(.+?)\"', pathlib.Path('src/pokemontcgapi/_version.py').read_text()).group(1))")
+          if [ "$tag" != "$version" ]; then
+            echo "tag v$tag does not match _version.py ($version)" >&2
+            exit 1
+          fi
+      - run: python -m pip install build
+      - run: python -m build
+      - uses: pypa/gh-action-pypi-publish@release/v1

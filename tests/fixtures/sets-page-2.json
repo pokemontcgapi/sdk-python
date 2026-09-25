@@ -1,0 +1,55 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "etag": "W/\"sets-2-gzip\"",
+    "x-request-id": "0000000000000000000000000000000c",
+    "x-credits-cost": "1",
+    "x-quota-remaining": "788"
+  },
+  "body": {
+    "data": [
+      {
+        "id": "m4",
+        "code": "m4",
+        "slug": "ultimate-sun",
+        "legacy_id": null,
+        "name": "Ultimate Sun",
+        "series": null,
+        "region": "JP",
+        "release_date": "2026-03-13",
+        "total": 100,
+        "printed_total": null,
+        "ptcgo_code": null,
+        "symbol_url": null,
+        "logo_url": "https://media.rarebit.app/sets/m4/logo-normal.webp",
+        "updated_at": "2026-08-26T17:47:39.900Z"
+      },
+      {
+        "id": "m3",
+        "code": "m3",
+        "slug": "heat-gale",
+        "legacy_id": null,
+        "name": "Heat Gale",
+        "series": null,
+        "region": "JP",
+        "release_date": "2026-01-23",
+        "total": 100,
+        "printed_total": null,
+        "ptcgo_code": null,
+        "symbol_url": null,
+        "logo_url": "https://media.rarebit.app/sets/m3/logo-normal.webp",
+        "updated_at": "2026-08-26T17:47:39.900Z"
+      }
+    ],
+    "meta": {
+      "limit": 2,
+      "count": 2,
+      "total_count": 5,
+      "has_more": true
+    },
+    "links": {
+      "next": "https://api.pokemontcgapi.com/v1/sets?limit=2&region=JP&cursor=eyJwIjp72fQ.sig2"
+    }
+  }
+}

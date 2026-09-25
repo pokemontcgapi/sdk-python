@@ -1,0 +1,49 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "public, max-age=60",
+    "x-request-id": "01385f29a3fdb662e53278b8d9503b8b",
+    "etag": "W/\"TSuRo28hmJB_oFqOtNnOAaDoeke-gzip\""
+  },
+  "body": {
+    "status": "ok",
+    "catalog": {
+      "sets": 651,
+      "cards": 57812,
+      "sealed": 2091,
+      "artists": 405
+    },
+    "sources": [
+      {
+        "source": "enrich-game-text",
+        "last_success_at": "2026-09-10T08:24:02.360Z",
+        "age_hours": 196.6,
+        "state": "fresh"
+      },
+      {
+        "source": "refresh-catalog",
+        "last_success_at": "2026-09-18T12:21:12.338Z",
+        "age_hours": 0.7,
+        "state": "fresh"
+      },
+      {
+        "source": "refresh-index",
+        "last_success_at": "2026-09-18T07:48:38.043Z",
+        "age_hours": 5.2,
+        "state": "fresh"
+      },
+      {
+        "source": "refresh-prices",
+        "last_success_at": "2026-09-18T07:44:17.838Z",
+        "age_hours": 5.3,
+        "state": "fresh"
+      }
+    ],
+    "upstream": {
+      "contract_ok": true,
+      "error": null
+    },
+    "version": "473aea743802"
+  }
+}

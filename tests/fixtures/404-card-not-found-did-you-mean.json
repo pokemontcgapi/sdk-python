@@ -1,0 +1,21 @@
+{
+  "status": 404,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "CARD_NOT_FOUND",
+    "x-request-id": "00000000000000000000000000000006"
+  },
+  "body": {
+    "error": {
+      "code": "CARD_NOT_FOUND",
+      "message": "No card found with id \"bs-4x\". Did you mean \"bs-4\" (Charizard, Base)?",
+      "request_id": "00000000000000000000000000000006",
+      "details": {
+        "id": "bs-4x",
+        "did_you_mean": "bs-4",
+        "did_you_mean_name": "Charizard",
+        "did_you_mean_set": "Base"
+      }
+    }
+  }
+}

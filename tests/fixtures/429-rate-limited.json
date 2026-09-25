@@ -1,0 +1,17 @@
+{
+  "status": 429,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "RATE_LIMITED",
+    "x-request-id": "00000000000000000000000000000005",
+    "retry-after": "1",
+    "ratelimit-remaining": "0"
+  },
+  "body": {
+    "error": {
+      "code": "RATE_LIMITED",
+      "message": "Too many requests. Retry after 1 s.",
+      "request_id": "00000000000000000000000000000005"
+    }
+  }
+}

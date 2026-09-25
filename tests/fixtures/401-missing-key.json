@@ -1,0 +1,16 @@
+{
+  "status": 401,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "private, no-store",
+    "x-request-id": "478881efaf788319c1c39b1a388d62ed",
+    "x-error-code": "MISSING_API_KEY"
+  },
+  "body": {
+    "error": {
+      "code": "MISSING_API_KEY",
+      "message": "This endpoint requires an API key. Send it as \"X-Api-Key: <key>\", or as \"Authorization: Bearer <key>\". Create one at /v1/accounts/free.",
+      "request_id": "478881efaf788319c1c39b1a388d62ed"
+    }
+  }
+}

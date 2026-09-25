@@ -1,0 +1,30 @@
+{
+  "status": 400,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "INVALID_PARAMETER",
+    "x-request-id": "00000000000000000000000000000007"
+  },
+  "body": {
+    "error": {
+      "code": "INVALID_PARAMETER",
+      "message": "Unknown parameter \"page\". Use \"cursor\".",
+      "request_id": "00000000000000000000000000000007",
+      "details": {
+        "param": "page",
+        "field": "page",
+        "did_you_mean": "cursor",
+        "valid_params": [
+          "q",
+          "select",
+          "orderBy",
+          "limit",
+          "cursor",
+          "include",
+          "lang",
+          "set"
+        ]
+      }
+    }
+  }
+}

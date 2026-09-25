@@ -1,0 +1,26 @@
+{
+  "status": 403,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "PLAN_REQUIRED",
+    "x-request-id": "00000000000000000000000000000002"
+  },
+  "body": {
+    "error": {
+      "code": "PLAN_REQUIRED",
+      "message": "This route requires the Growth plan.",
+      "request_id": "00000000000000000000000000000002",
+      "details": {
+        "min_plan": "GROWTH",
+        "next_step": {
+          "action": "upgrade",
+          "actor": "account_owner",
+          "plans_url": "https://example.test/pricing",
+          "checkout_url": "https://example.test/subscribe?plan=developer&interval=monthly",
+          "handoff": "The account owner needs to open https://example.test/subscribe?plan=developer&interval=monthly.",
+          "manage_url": "https://example.test/account"
+        }
+      }
+    }
+  }
+}

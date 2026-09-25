@@ -1,0 +1,32 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-request-id": "00000000000000000000000000000001",
+    "x-credits-cost": "3",
+    "x-quota-limit": "800",
+    "x-quota-remaining": "797",
+    "x-quota-reset": "2026-10-01T00:00:00Z"
+  },
+  "body": {
+    "data": [
+      {
+        "id": "sv8-100"
+      }
+    ],
+    "requested": 3,
+    "found": 1,
+    "missing": [
+      {
+        "id": "sv8-116",
+        "suggested_id": "ssp-116"
+      },
+      {
+        "id": "inventato-xyz"
+      }
+    ],
+    "withheld": [
+      "index"
+    ]
+  }
+}

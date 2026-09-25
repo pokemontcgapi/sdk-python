@@ -1,0 +1,29 @@
+{
+  "status": 429,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "QUOTA_EXCEEDED",
+    "x-request-id": "00000000000000000000000000000004",
+    "retry-after": "3600",
+    "x-quota-limit": "800",
+    "x-quota-remaining": "0"
+  },
+  "body": {
+    "error": {
+      "code": "QUOTA_EXCEEDED",
+      "message": "Exhausted",
+      "request_id": "00000000000000000000000000000004",
+      "details": {
+        "quota_limit": 800,
+        "retry_after_s": 3600,
+        "next_step": {
+          "action": "subscribe",
+          "actor": "account_owner",
+          "plans_url": "https://example.test/pricing",
+          "checkout_url": "https://example.test/subscribe?plan=developer&interval=monthly",
+          "handoff": "The account owner needs to open https://example.test/subscribe?plan=developer&interval=monthly."
+        }
+      }
+    }
+  }
+}

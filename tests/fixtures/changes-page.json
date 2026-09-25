@@ -1,0 +1,28 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-request-id": "00000000000000000000000000000028",
+    "x-credits-cost": "1"
+  },
+  "body": {
+    "data": [
+      {
+        "id": 43,
+        "kind": "CARD",
+        "entity_id": "bs-4",
+        "op": "UPDATE",
+        "version": 7,
+        "changed_at": "2026-09-20T10:00:00Z"
+      }
+    ],
+    "meta": {
+      "count": 1,
+      "has_more": false,
+      "next_since": 43,
+      "watermark": 43,
+      "oldest_available": 1,
+      "behind": 0
+    }
+  }
+}

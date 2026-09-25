@@ -1,0 +1,61 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-request-id": "0000000000000000000000000000001e",
+    "x-credits-cost": "25"
+  },
+  "body": {
+    "data": {
+      "decision": "ambiguous",
+      "decision_reason": "reprint",
+      "id": null,
+      "candidates": [
+        {
+          "id": "bs-4",
+          "name": "Charizard",
+          "number": "4",
+          "set": {
+            "code": "bs",
+            "name": "Base Set",
+            "print_region": "WEST"
+          },
+          "rarity": "Rare Holo",
+          "image_url": "https://img.pokemontcgapi.com/cards/bs/4-normal.webp",
+          "distance": 31,
+          "confidence": 0.818
+        },
+        {
+          "id": "b2-4",
+          "name": "Charizard",
+          "number": "4",
+          "set": {
+            "code": "b2",
+            "name": "Base Set 2",
+            "print_region": "WEST"
+          },
+          "rarity": "Rare Holo",
+          "image_url": "https://img.pokemontcgapi.com/cards/b2/4-normal.webp",
+          "distance": 38,
+          "confidence": 0.776
+        }
+      ]
+    },
+    "meta": {
+      "count": 2,
+      "cards_indexed": 51983,
+      "index_built_at": "2026-08-27T04:10:22Z",
+      "index_loaded_at": "2026-08-27T05:10:22Z",
+      "signature_version": 1,
+      "regions_detected": 2,
+      "hypotheses_tried": 16,
+      "ocr": {
+        "applied": false,
+        "number": 4,
+        "ms": 210,
+        "reason": "multiple"
+      },
+      "elapsed_ms": 284
+    }
+  }
+}
