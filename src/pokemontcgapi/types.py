@@ -37,7 +37,9 @@ CardInclude = Literal["index", "prices", "translations", "images", "set", "artis
 
 
 class Grading(TypedDict):
-    company: str
+    #: None when the source publishes a grade band valid for any grader (PriceCharting's "grade 9").
+    #: A graded row is ``grading is not None``.
+    company: str | None
     score: str
 
 
