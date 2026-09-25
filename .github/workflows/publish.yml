@@ -19,7 +19,8 @@ jobs:
       - name: Tag must match the package version
         run: |
           tag="${GITHUB_REF_NAME#v}"
-          version=$(python -c "import re, pathlib; print(re.search(r'\"(.+?)\"', pathlib.Path('src/pokemontcgapi/_version.py').read_text()).group(1))")
+          # _version.py has no imports, so executing it is the exact reading (a regex on quotes tripped on the docstring).
+          version=$(python -c "exec(open('src/pokemontcgapi/_version.py').read()); print(__version__)")
           if [ "$tag" != "$version" ]; then
             echo "tag v$tag does not match _version.py ($version)" >&2
             exit 1
