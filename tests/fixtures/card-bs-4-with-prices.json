@@ -10,7 +10,9 @@
     "x-quota-remaining": "780",
     "x-quota-reset": "2026-10-01T00:00:00Z",
     "ratelimit-remaining": "4",
-    "x-trial-expires-at": "2026-10-18T09:00:00Z"
+    "x-trial-expires-at": "2026-10-18T09:00:00Z",
+    "x-cards-limit": "1000",
+    "x-cards-used": "37"
   },
   "body": {
     "id": "bs-4",

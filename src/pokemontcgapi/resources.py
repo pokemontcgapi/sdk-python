@@ -112,7 +112,7 @@ def _image_payload(image: bytes | bytearray | IO[bytes] | os.PathLike[str] | str
     return {"image": ("card", data, "application/octet-stream")}
 
 
-def _identify_fields(top_k: int | None, set: str | None, region: PrintRegion | None) -> dict[str, str]:  # noqa: A002
+def _identify_fields(top_k: int | None, set: str | None, region: PrintRegion | None, include: str | None) -> dict[str, str]:  # noqa: A002
     fields: dict[str, str] = {}
     if top_k is not None:
         fields["top_k"] = str(top_k)
@@ -120,6 +120,8 @@ def _identify_fields(top_k: int | None, set: str | None, region: PrintRegion | N
         fields["set"] = set
     if region is not None:
         fields["region"] = region
+    if include is not None:
+        fields["include"] = include
     return fields
 
 
@@ -400,7 +402,7 @@ class ReferenceResource:
 class VisionResource:
     """Recognition of a card from a photograph.
 
-    It costs 25 credits a call against the one of a lookup: it is the only route that does not return
+    It costs 25 base credits a call; include=index adds 1 and include=prices adds 4 with top_k <= 10. It does not return
     a row but the outcome of a comparison with the whole image index. Worth knowing before putting it
     in a loop.
     """
@@ -415,6 +417,7 @@ class VisionResource:
         top_k: int | None = None,
         set: str | None = None,  # noqa: A002
         region: PrintRegion | None = None,
+        include: str | None = None,
     ) -> VisionResponse:
         """Send a photo, receive the ranked candidates.
 
@@ -424,7 +427,7 @@ class VisionResource:
         knows the set, pass it in ``set``: it is what breaks the tie.
         """
         files = _image_payload(image)
-        data = _identify_fields(top_k, set, region)
+        data = _identify_fields(top_k, set, region, include)
         return cast(VisionResponse, self._http.post("/v1/vision/identify", data=data or None, files=files))
 
 
@@ -669,9 +672,10 @@ class AsyncVisionResource:
         top_k: int | None = None,
         set: str | None = None,  # noqa: A002
         region: PrintRegion | None = None,
+        include: str | None = None,
     ) -> VisionResponse:
         files = _image_payload(image)
-        data = _identify_fields(top_k, set, region)
+        data = _identify_fields(top_k, set, region, include)
         return cast(VisionResponse, await self._http.post("/v1/vision/identify", data=data or None, files=files))
 
 

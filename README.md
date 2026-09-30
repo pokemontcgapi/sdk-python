@@ -263,7 +263,7 @@ There is no printing filter on `include=["prices"]`: first edition, holofoil and
 `DERIVED` (computed by us). `PTCG_INDEX` is a composite index in EUR carrying `sample_n`, and the same
 number sits on the card row as `index_eur` wherever we have enough observations to compute one: 51,636
 cards of 57,450 on 16 September 2026, so treat it as nullable. On a list or batch it comes with `include=["index"]`
-(1 credit per 50 rows), so a list still has a comparable number without a second request per card.
+(the same 1 credit per 50 rows requested as the bare list), so a list still has a comparable number without a second request per card. Card and sealed lists are priced per 50 rows requested since 2026-09-30: the default page of 50 costs 1 credit, a page of 250 costs 5. Every card a plan below Growth retrieves counts towards its distinct-card allowance (1,000 for the whole trial, 30,000 a month on Developer); at the limit, cards already retrieved keep answering and a request adding new ones raises the 403 `CARD_ALLOWANCE_EXCEEDED` (a `PermissionDenied` error) with `next_step`. The `X-Cards-Limit` and `X-Cards-Used` headers say where you stand. Image URLs come signed and stay valid for at least a week: store the card id, not the URL.
 
 What your plan withholds is named rather than hidden, but it is named in three different places, so
 read the one that matches the call you made:

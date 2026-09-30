@@ -73,6 +73,8 @@ def test_response_info() -> None:
         rate_limit_remaining=4,
         plan_withheld=("graded", "non_english_locales"),
         trial_expires_at="2026-10-18T09:00:00Z",
+        cards_limit=1000,
+        cards_used=37,
     )
 
     client = make_client(Recorder(ok({}, **{"x-credits-cost": "n/a", "x-quota-limit": "12.0", "x-plan-withheld": ""})))
@@ -81,6 +83,8 @@ def test_response_info() -> None:
     assert client.last_response.credits_cost is None
     assert client.last_response.quota_limit == 12
     assert client.last_response.plan_withheld == ()
+    assert client.last_response.cards_limit is None
+    assert client.last_response.cards_used is None
 
 
 def test_on_response_called_on_errors() -> None:

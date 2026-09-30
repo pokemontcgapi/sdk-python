@@ -483,6 +483,9 @@ class VisionCandidate(TypedDict):
     set: VisionCandidateSet
     rarity: str | None
     image_url: str | None
+    index_eur: NotRequired[float | None]
+    last_price_at: NotRequired[str | None]
+    prices: NotRequired[list[Price]]
     #: Hamming distance, 0..512. Real matches sit below 150 even on a noisy photo; nothing above 170
     #: is returned.
     distance: int
@@ -527,3 +530,4 @@ class VisionMeta(TypedDict):
 class VisionResponse(TypedDict):
     data: VisionResult
     meta: VisionMeta
+    withheld: NotRequired[list[str]]

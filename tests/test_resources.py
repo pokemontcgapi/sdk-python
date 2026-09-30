@@ -102,7 +102,7 @@ def test_reference_single_request() -> None:
 def test_vision_multipart(tmp_path: Path) -> None:
     handler = Recorder(load_fixture("vision-ambiguous"))
     client = make_client(handler)
-    response = client.vision.identify(b"\xff\xd8\xff", top_k=3, set="bs", region="WEST")
+    response = client.vision.identify(b"\xff\xd8\xff", top_k=3, set="bs", region="WEST", include="index,prices")
     assert response["data"]["decision"] == "ambiguous" and response["data"]["id"] is None
     request = handler.requests[0]
     assert request.method == "POST" and request.url.path == "/v1/vision/identify"
@@ -112,6 +112,7 @@ def test_vision_multipart(tmp_path: Path) -> None:
     assert b'name="image"; filename="card"' in body
     assert b"\xff\xd8\xff" in body
     assert b'name="top_k"\r\n\r\n3' in body and b'name="set"\r\n\r\nbs' in body and b'name="region"\r\n\r\nWEST' in body
+    assert b'name="include"\r\n\r\nindex,prices' in body
 
     # Bytes only: no optional field travels.
     client.vision.identify(bytearray(b"\x89PNG"))

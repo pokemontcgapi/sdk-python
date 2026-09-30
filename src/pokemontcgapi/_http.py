@@ -63,6 +63,11 @@ class ResponseInfo:
     plan_withheld: tuple[str, ...]
     #: Trial only: when it ends.
     trial_expires_at: str | None
+    #: Distinct-card allowance of the period and cards already retrieved BEFORE this response;
+    #: ``None`` from Growth up, where there is no allowance. A 403 ``CARD_ALLOWANCE_EXCEEDED`` comes
+    #: when ``cards_used`` is at the limit and the request would add new cards.
+    cards_limit: int | None = None
+    cards_used: int | None = None
 
 
 def _header_number(headers: httpx.Headers, name: str) -> int | None:
@@ -95,6 +100,8 @@ def response_info(url: str, response: httpx.Response) -> ResponseInfo:
         rate_limit_remaining=_header_number(headers, "ratelimit-remaining"),
         plan_withheld=tuple(v.strip() for v in withheld.split(",")) if withheld else (),
         trial_expires_at=headers.get("x-trial-expires-at"),
+        cards_limit=_header_number(headers, "x-cards-limit"),
+        cards_used=_header_number(headers, "x-cards-used"),
     )
 
 
