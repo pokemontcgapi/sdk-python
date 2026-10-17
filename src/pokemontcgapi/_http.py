@@ -280,9 +280,16 @@ class HttpClient(_Transport):
         """
         return self._request(absolute_url)
 
-    def post(self, path: str, *, data: Mapping[str, str] | None = None, files: Mapping[str, Any] | None = None) -> Any:
+    def post(
+        self,
+        path: str,
+        *,
+        data: Mapping[str, str] | None = None,
+        files: Mapping[str, Any] | None = None,
+        json: object = None,
+    ) -> Any:
         """POST with a body. Never retried: a POST that may have arrived is not idempotent."""
-        return self._attempt(self.url(path), method="POST", data=data, files=files)
+        return self._attempt(self.url(path), method="POST", data=data, files=files, json=json)
 
     def _request(self, url: str) -> Any:
         for attempt in range(self.max_retries + 1):
@@ -302,11 +309,12 @@ class HttpClient(_Transport):
         method: str = "GET",
         data: Mapping[str, str] | None = None,
         files: Mapping[str, Any] | None = None,
+        json: object = None,
     ) -> Any:
         write = method != "GET"
         headers, cached = self._headers(url, write=write)
         try:
-            response = self._client.request(method, url, headers=headers, data=data, files=files)
+            response = self._client.request(method, url, headers=headers, data=data, files=files, json=json)
         except httpx.TimeoutException as error:
             raise self._timeout_error(error) from error
         except httpx.HTTPError as error:
@@ -348,9 +356,14 @@ class AsyncHttpClient(_Transport):
         return await self._request(absolute_url)
 
     async def post(
-        self, path: str, *, data: Mapping[str, str] | None = None, files: Mapping[str, Any] | None = None
+        self,
+        path: str,
+        *,
+        data: Mapping[str, str] | None = None,
+        files: Mapping[str, Any] | None = None,
+        json: object = None,
     ) -> Any:
-        return await self._attempt(self.url(path), method="POST", data=data, files=files)
+        return await self._attempt(self.url(path), method="POST", data=data, files=files, json=json)
 
     async def _request(self, url: str) -> Any:
         for attempt in range(self.max_retries + 1):
@@ -370,11 +383,12 @@ class AsyncHttpClient(_Transport):
         method: str = "GET",
         data: Mapping[str, str] | None = None,
         files: Mapping[str, Any] | None = None,
+        json: object = None,
     ) -> Any:
         write = method != "GET"
         headers, cached = self._headers(url, write=write)
         try:
-            response = await self._client.request(method, url, headers=headers, data=data, files=files)
+            response = await self._client.request(method, url, headers=headers, data=data, files=files, json=json)
         except httpx.TimeoutException as error:
             raise self._timeout_error(error) from error
         except httpx.HTTPError as error:

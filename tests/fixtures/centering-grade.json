@@ -1,0 +1,75 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "cache-control": "private, no-store",
+    "x-credits-cost": "1"
+  },
+  "body": {
+    "data": {
+      "front": {
+        "ratios": {
+          "lr": 55,
+          "tb": 52
+        },
+        "missing_axes": [],
+        "ceilings": {
+          "PSA": {
+            "maximum_grade": 10,
+            "label": "GEM MT",
+            "rank": 100,
+            "limiting_face": "front",
+            "limiting_axis": "lr",
+            "distance_to_next": null,
+            "next_grade": null,
+            "next_label": null,
+            "borderline": false,
+            "unconstrained": false,
+            "source_status": "official",
+            "standard_status": "official",
+            "source": "https://www.psacard.com/gradingstandards",
+            "sources": [
+              "https://www.psacard.com/gradingstandards"
+            ],
+            "reviewed_at": "2026-10-01",
+            "verification": "retrieved"
+          }
+        }
+      },
+      "back": null,
+      "combined": {
+        "PSA": {
+          "maximum_grade": 10,
+          "label": "GEM MT",
+          "rank": 100,
+          "limiting_face": "front",
+          "limiting_axis": "lr",
+          "distance_to_next": null,
+          "next_grade": null,
+          "next_label": null,
+          "borderline": false,
+          "unconstrained": false,
+          "source_status": "official",
+          "standard_status": "official",
+          "source": "https://www.psacard.com/gradingstandards",
+          "sources": [
+            "https://www.psacard.com/gradingstandards"
+          ],
+          "reviewed_at": "2026-10-01",
+          "verification": "retrieved"
+        }
+      },
+      "normalizations": [],
+      "incomplete": true,
+      "missing_faces": [
+        "back"
+      ],
+      "summary": "PSA: 10 GEM MT. These ceilings use only the supplied ratios; missing axes or the other face can lower them. This is a ceiling from centering alone, not a prediction of the final grade.",
+      "disclaimer": "This is a ceiling from centering alone, not a prediction of the final grade."
+    },
+    "meta": {
+      "elapsed_ms": 0,
+      "engine_version": "1.0.0"
+    }
+  }
+}

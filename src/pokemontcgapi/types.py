@@ -245,7 +245,7 @@ class Links(TypedDict, total=False):
 
 class MissingCard(TypedDict):
     id: str
-    #: Present only for an existing historical alias in a different canonical set.
+    #: Present only when the API identifies an existing candidate for an unresolved id.
     suggested_id: NotRequired[str]
 
 
@@ -531,3 +531,244 @@ class VisionResponse(TypedDict):
     data: VisionResult
     meta: VisionMeta
     withheld: NotRequired[list[str]]
+
+# Centering: hand-written from the TypeScript SDK, field by field, in the same order.
+CenteringFace = Literal["front", "back"]
+CenteringSize = Literal["standard", "small"]
+CenteringHouse = Literal["PSA", "BGS", "CGC", "SGC"]
+CenteringSourceStatus = Literal["official", "interpreted", "approximate"]
+CenteringAxisName = Literal["lr", "tb"]
+
+
+class CenteringPoint(TypedDict):
+    x: float
+    y: float
+
+
+CenteringCorners = tuple[CenteringPoint, CenteringPoint, CenteringPoint, CenteringPoint]
+
+
+class CenteringDimensions(TypedDict):
+    width: int
+    height: int
+
+
+class CenteringRectified(CenteringDimensions):
+    rotations: int
+    corner_offset: int
+
+
+class CenteringLine(TypedDict):
+    intercept: float
+    slope: float
+
+
+class CenteringLineGroup(TypedDict):
+    left: CenteringLine
+    right: CenteringLine
+    top: CenteringLine
+    bottom: CenteringLine
+
+
+class CenteringLines(TypedDict):
+    cut: CenteringLineGroup
+    print: CenteringLineGroup
+
+
+class CenteringGeometry(TypedDict):
+    geometry_version: Literal[1]
+    image: CenteringDimensions
+    corners: CenteringCorners
+    rectified: CenteringRectified
+    lines: CenteringLines
+    card_size: CenteringSize
+    warnings: list[str]
+    positioning_sigma: NotRequired[float]
+
+
+class CenteringCeiling(TypedDict):
+    maximum_grade: float | None
+    label: str | None
+    rank: float | None
+    limiting_face: CenteringFace
+    limiting_axis: CenteringAxisName
+    distance_to_next: float | None
+    next_grade: float | None
+    next_label: str | None
+    borderline: bool
+    unconstrained: bool
+    source_status: CenteringSourceStatus
+    standard_status: CenteringSourceStatus
+    source: str
+    sources: list[str]
+    reviewed_at: str
+    verification: str
+
+
+class CenteringAxis(TypedDict):
+    ratio: str
+    major_percent: float
+    minor_percent: float
+    uncertainty_pp: float
+    sigma_pp: float
+    worst_station_px: float
+    stations_major_percent: list[float]
+
+
+class CenteringNormalization(TypedDict):
+    field: str
+    input: NotRequired[float | str]
+    ratio: NotRequired[str]
+    note: str
+
+
+class CenteringMeasureResult(TypedDict):
+    status: Literal["ok", "needs-review", "failed"]
+    code: str
+    face: CenteringFace
+    card_size: CenteringSize
+    lr: CenteringAxis | None
+    tb: CenteringAxis | None
+    confidence: float | None
+    warnings: list[str]
+    ceilings: dict[CenteringHouse, CenteringCeiling] | None
+    advice: str
+    elapsed_ms: float
+    normalizations: list[CenteringNormalization]
+    image_bytes: int
+    summary: str
+    disclaimer: str
+    geometry: NotRequired[CenteringGeometry]
+
+
+# Separate dictionary because TypedDict fields cannot be narrowed by inheritance.
+class CenteringConfirmResult(TypedDict):
+    status: Literal["ok"]
+    code: Literal["OK"]
+    face: CenteringFace
+    card_size: CenteringSize
+    lr: CenteringAxis | None
+    tb: CenteringAxis | None
+    confidence: float | None
+    warnings: list[str]
+    ceilings: dict[CenteringHouse, CenteringCeiling]
+    advice: str
+    elapsed_ms: float
+    normalizations: list[CenteringNormalization]
+    image_bytes: int
+    summary: str
+    disclaimer: str
+    basis: Literal["client-confirmed-lines"]
+
+
+class CenteringMeta(TypedDict):
+    elapsed_ms: float
+    engine_version: str
+
+
+class CenteringMeasureResponse(TypedDict):
+    data: CenteringMeasureResult
+    meta: CenteringMeta
+
+
+class CenteringConfirmResponse(TypedDict):
+    data: CenteringConfirmResult
+    meta: CenteringMeta
+
+
+class CenteringMeasureOptions(TypedDict):
+    face: CenteringFace
+    card_size: NotRequired[CenteringSize]
+    corners: NotRequired[CenteringCorners]
+
+
+class CenteringConfirmInput(TypedDict):
+    face: CenteringFace
+    card_size: CenteringSize
+    geometry: CenteringGeometry
+    confirmed_by: Literal["person"]
+
+
+CenteringRatio = float | str | tuple[float | str, float | str]
+
+
+class CenteringKnownFace(TypedDict, total=False):
+    lr: CenteringRatio
+    tb: CenteringRatio
+
+
+class CenteringGradeInput(TypedDict, total=False):
+    front_lr: CenteringRatio
+    front_tb: CenteringRatio
+    back_lr: CenteringRatio
+    back_tb: CenteringRatio
+    front: CenteringKnownFace
+    back: CenteringKnownFace
+    house: CenteringHouse
+
+
+class CenteringRatios(TypedDict):
+    lr: float | None
+    tb: float | None
+
+
+class CenteringFaceGrade(TypedDict):
+    ratios: CenteringRatios
+    missing_axes: list[CenteringAxisName]
+    ceilings: dict[CenteringHouse, CenteringCeiling]
+
+
+class CenteringGradeResult(TypedDict):
+    front: CenteringFaceGrade | None
+    back: CenteringFaceGrade | None
+    combined: dict[CenteringHouse, CenteringCeiling]
+    normalizations: list[CenteringNormalization]
+    incomplete: bool
+    missing_faces: list[CenteringFace]
+    summary: str
+    disclaimer: str
+
+
+class CenteringGradeResponse(TypedDict):
+    data: CenteringGradeResult
+    meta: CenteringMeta
+
+
+class CenteringBand(TypedDict):
+    value: float
+    label: str
+    rank: float
+    loose: float
+    tight: NotRequired[float]
+    status: CenteringSourceStatus
+
+
+class CenteringStandard(TypedDict):
+    house: CenteringHouse
+    face: CenteringFace
+    bands: list[CenteringBand]
+    source: str
+    sources: list[str]
+    status: CenteringSourceStatus
+    reviewed_at: str
+    verification: str
+    note: str
+
+
+class CenteringStandardsResult(TypedDict):
+    normalizations: list[CenteringNormalization]
+    standards: list[CenteringStandard]
+    rounding_rule: str
+    tag_note: str
+    summary: str
+    disclaimer: str
+
+
+class CenteringStandardsResponse(TypedDict):
+    data: CenteringStandardsResult
+    meta: CenteringMeta
+
+
+class CenteringStandardsOptions(TypedDict, total=False):
+    house: CenteringHouse
+    face: CenteringFace

@@ -7,6 +7,7 @@ what travels on the wire, the two variants only decide whether to ``await`` it.
 
 from __future__ import annotations
 
+import json
 import os
 from collections.abc import Sequence
 from pathlib import Path
@@ -23,6 +24,16 @@ from .types import (
     CardPricesBatchResult,
     CardPricesResponse,
     CardSet,
+    CenteringConfirmInput,
+    CenteringConfirmResponse,
+    CenteringCorners,
+    CenteringFace,
+    CenteringGradeInput,
+    CenteringGradeResponse,
+    CenteringHouse,
+    CenteringMeasureResponse,
+    CenteringSize,
+    CenteringStandardsResponse,
     ChangesResponse,
     HistoryResponse,
     Locale,
@@ -700,3 +711,86 @@ __all__ = [
 
 # Silence the unused-import check for the response types used only inside casts.
 _ = (ChangesResponse,)
+
+
+class CenteringResource:
+    """Growth and higher. Trial: 5 measure and 5 confirm, independently, after email verification."""
+
+    def __init__(self, http: HttpClient) -> None:
+        self._http = http
+
+    def measure(
+        self,
+        image: bytes | bytearray | IO[bytes] | os.PathLike[str] | str,
+        *,
+        face: CenteringFace,
+        card_size: CenteringSize | None = None,
+        corners: CenteringCorners | None = None,
+    ) -> CenteringMeasureResponse:
+        """25 credits. Show geometry and uncertainty; needs-review without ceilings is expected."""
+        data: dict[str, str] = {"face": face}
+        if card_size is not None:
+            data["card_size"] = card_size
+        if corners is not None:
+            data["corners"] = json.dumps(corners)
+        return cast(
+            CenteringMeasureResponse, self._http.post("/v1/centering/measure", data=data, files=_image_payload(image))
+        )
+
+    def confirm(self, payload: CenteringConfirmInput) -> CenteringConfirmResponse:
+        """5 credits. A person must have reviewed the lines in your app before this call."""
+        return cast(CenteringConfirmResponse, self._http.post("/v1/centering/confirm", json=payload))
+
+    def grade(self, payload: CenteringGradeInput) -> CenteringGradeResponse:
+        """1 credit. Ceiling from centering alone, not a prediction of the final grade."""
+        return cast(CenteringGradeResponse, self._http.post("/v1/centering/grade", json=payload))
+
+    def standards(
+        self, *, house: CenteringHouse | None = None, face: CenteringFace | None = None
+    ) -> CenteringStandardsResponse:
+        """1 credit. Thresholds with source status and provenance."""
+        return cast(
+            CenteringStandardsResponse, self._http.get("/v1/centering/standards", {"house": house, "face": face})
+        )
+
+
+class AsyncCenteringResource:
+    """Growth and higher. Trial: 5 measure and 5 confirm, independently, after email verification."""
+
+    def __init__(self, http: AsyncHttpClient) -> None:
+        self._http = http
+
+    async def measure(
+        self,
+        image: bytes | bytearray | IO[bytes] | os.PathLike[str] | str,
+        *,
+        face: CenteringFace,
+        card_size: CenteringSize | None = None,
+        corners: CenteringCorners | None = None,
+    ) -> CenteringMeasureResponse:
+        """25 credits. Show geometry and uncertainty; needs-review without ceilings is expected."""
+        data: dict[str, str] = {"face": face}
+        if card_size is not None:
+            data["card_size"] = card_size
+        if corners is not None:
+            data["corners"] = json.dumps(corners)
+        return cast(
+            CenteringMeasureResponse,
+            await self._http.post("/v1/centering/measure", data=data, files=_image_payload(image)),
+        )
+
+    async def confirm(self, payload: CenteringConfirmInput) -> CenteringConfirmResponse:
+        """5 credits. A person must have reviewed the lines in your app before this call."""
+        return cast(CenteringConfirmResponse, await self._http.post("/v1/centering/confirm", json=payload))
+
+    async def grade(self, payload: CenteringGradeInput) -> CenteringGradeResponse:
+        """1 credit. Ceiling from centering alone, not a prediction of the final grade."""
+        return cast(CenteringGradeResponse, await self._http.post("/v1/centering/grade", json=payload))
+
+    async def standards(
+        self, *, house: CenteringHouse | None = None, face: CenteringFace | None = None
+    ) -> CenteringStandardsResponse:
+        """1 credit. Thresholds with source status and provenance."""
+        return cast(
+            CenteringStandardsResponse, await self._http.get("/v1/centering/standards", {"house": house, "face": face})
+        )
