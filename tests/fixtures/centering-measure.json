@@ -1,0 +1,131 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "cache-control": "private, no-store",
+    "x-credits-cost": "25"
+  },
+  "body": {
+    "data": {
+      "status": "needs-review",
+      "code": "HIGH_UNCERTAINTY",
+      "face": "front",
+      "card_size": "standard",
+      "lr": {
+        "ratio": "57/43",
+        "major_percent": 57.03939509255776,
+        "minor_percent": 42.96060490744224,
+        "uncertainty_pp": 3.2,
+        "sigma_pp": 1.4436399943093712,
+        "worst_station_px": 350.01602511506974,
+        "stations_major_percent": [
+          57.03939509255776,
+          56.98085809751625,
+          56.922531909006175
+        ]
+      },
+      "tb": {
+        "ratio": "52/48",
+        "major_percent": 51.99426399246583,
+        "minor_percent": 48.00573600753417,
+        "uncertainty_pp": 2.8,
+        "sigma_pp": 1.2834630215822538,
+        "worst_station_px": 249.97486219711377,
+        "stations_major_percent": [
+          51.99426399246583,
+          51.97135354918483,
+          51.94844520547227
+        ]
+      },
+      "confidence": 0.9214681922123064,
+      "warnings": [
+        "GET_CLOSER"
+      ],
+      "ceilings": null,
+      "advice": "Retake a photo of the whole card, straight from above, on a dark flat background and out of its sleeve; or mark the corners and adjust the border lines in your application. For borderless fronts, measure the back.",
+      "elapsed_ms": 296.80170899999996,
+      "normalizations": [],
+      "image_bytes": 1093291,
+      "summary": "needs-review: HIGH_UNCERTAINTY. Automatic centering is not reliable enough to give grade ceilings. Retake a photo of the whole card, straight from above, on a dark flat background and out of its sleeve; or mark the corners and adjust the border lines in your application. For borderless fronts, measure the back. This is a ceiling from centering alone, not a prediction of the final grade.",
+      "disclaimer": "This is a ceiling from centering alone, not a prediction of the final grade.",
+      "geometry": {
+        "geometry_version": 1,
+        "image": {
+          "width": 800,
+          "height": 960
+        },
+        "corners": [
+          {
+            "x": 315.87424656190825,
+            "y": 67.82362658406812
+          },
+          {
+            "x": 762.5560228622654,
+            "y": 266.68569857507333
+          },
+          {
+            "x": 511.0026611084117,
+            "y": 904.0836010529077
+          },
+          {
+            "x": 10.556528389758789,
+            "y": 681.2867887659505
+          }
+        ],
+        "rectified": {
+          "width": 1100,
+          "height": 1540,
+          "rotations": 0,
+          "corner_offset": 0
+        },
+        "lines": {
+          "cut": {
+            "left": {
+              "intercept": 49.93539826150567,
+              "slope": 0.00012891325544965915
+            },
+            "right": {
+              "intercept": 1050.1327179395462,
+              "slope": -0.00016133378743782848
+            },
+            "top": {
+              "intercept": 70.01188071447187,
+              "slope": 0.00006325286113347307
+            },
+            "bottom": {
+              "intercept": 1470.032602717461,
+              "slope": 0.00004132492422915254
+            }
+          },
+          "print": {
+            "left": {
+              "intercept": 103.94003346691179,
+              "slope": 0.00022914571556586211
+            },
+            "right": {
+              "intercept": 1009.5389888055527,
+              "slope": -0.0004687376878776529
+            },
+            "top": {
+              "intercept": 122.46437418271441,
+              "slope": -0.000005743348585744223
+            },
+            "bottom": {
+              "intercept": 1421.6408100442256,
+              "slope": -0.00004307293680597076
+            }
+          }
+        },
+        "card_size": "standard",
+        "warnings": [
+          "GET_CLOSER"
+        ],
+        "positioning_sigma": 0.8684521246983091
+      }
+    },
+    "meta": {
+      "elapsed_ms": 0,
+      "engine_version": "1.0.0"
+    }
+  }
+}

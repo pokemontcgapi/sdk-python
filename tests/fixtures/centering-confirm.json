@@ -1,0 +1,137 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "cache-control": "private, no-store",
+    "x-credits-cost": "5"
+  },
+  "body": {
+    "data": {
+      "status": "ok",
+      "code": "OK",
+      "face": "front",
+      "card_size": "standard",
+      "lr": {
+        "ratio": "57/43",
+        "major_percent": 57.043033695585834,
+        "minor_percent": 42.956966304414166,
+        "uncertainty_pp": 3.1,
+        "sigma_pp": 1.4308512800184152,
+        "worst_station_px": 350,
+        "stations_major_percent": [
+          57.043033695585834,
+          56.993401021753,
+          56.94400625495934
+        ]
+      },
+      "tb": {
+        "ratio": "52/48",
+        "major_percent": 51.98633109838324,
+        "minor_percent": 48.01366890161676,
+        "uncertainty_pp": 2.9,
+        "sigma_pp": 1.3316090517824892,
+        "worst_station_px": 250,
+        "stations_major_percent": [
+          51.98633109838324,
+          51.97251051504912,
+          51.95869275717155
+        ]
+      },
+      "confidence": 0.9499202051993555,
+      "warnings": [],
+      "ceilings": {
+        "PSA": {
+          "maximum_grade": 9,
+          "label": "MINT",
+          "rank": 90,
+          "limiting_face": "front",
+          "limiting_axis": "lr",
+          "distance_to_next": 2.0430336955858337,
+          "next_grade": 10,
+          "next_label": "GEM MT",
+          "borderline": true,
+          "unconstrained": false,
+          "source_status": "official",
+          "standard_status": "official",
+          "source": "https://www.psacard.com/gradingstandards",
+          "sources": [
+            "https://www.psacard.com/gradingstandards"
+          ],
+          "reviewed_at": "2026-10-01",
+          "verification": "retrieved"
+        },
+        "BGS": {
+          "maximum_grade": 8.5,
+          "label": "NM-Mint+",
+          "rank": 85,
+          "limiting_face": "front",
+          "limiting_axis": "lr",
+          "distance_to_next": 2.0430336955858337,
+          "next_grade": 9,
+          "next_label": "Mint",
+          "borderline": true,
+          "unconstrained": false,
+          "source_status": "interpreted",
+          "standard_status": "interpreted",
+          "source": "https://www.beckett.com/grading/scale",
+          "sources": [
+            "https://www.beckett.com/grading/scale"
+          ],
+          "reviewed_at": "2026-10-01",
+          "verification": "unavailable"
+        },
+        "CGC": {
+          "maximum_grade": 9,
+          "label": "Mint",
+          "rank": 90,
+          "limiting_face": "front",
+          "limiting_axis": "lr",
+          "distance_to_next": 2.0430336955858337,
+          "next_grade": 10,
+          "next_label": "Gem Mint",
+          "borderline": true,
+          "unconstrained": false,
+          "source_status": "interpreted",
+          "standard_status": "interpreted",
+          "source": "https://www.cgccards.com/card-grading/grading-scale/",
+          "sources": [
+            "https://www.cgccards.com/card-grading/grading-scale/"
+          ],
+          "reviewed_at": "2026-10-01",
+          "verification": "retrieved"
+        },
+        "SGC": {
+          "maximum_grade": 9,
+          "label": "Mint",
+          "rank": 90,
+          "limiting_face": "front",
+          "limiting_axis": "lr",
+          "distance_to_next": 2.0430336955858337,
+          "next_grade": 10,
+          "next_label": "Gem Mint",
+          "borderline": true,
+          "unconstrained": false,
+          "source_status": "approximate",
+          "standard_status": "approximate",
+          "source": "https://www.gosgc.com/card-grading-scale",
+          "sources": [
+            "https://www.cardcenteringcalculator.com/articles/card-centering-tolerance-by-grade"
+          ],
+          "reviewed_at": "2026-10-01",
+          "verification": "brief-only"
+        }
+      },
+      "advice": "Lines confirmed by the client. Measure the other face too; a person checked the lines in your application.",
+      "elapsed_ms": 0,
+      "normalizations": [],
+      "image_bytes": 0,
+      "summary": "front: L/R 57/43 ±3.1 pp; T/B 52/48 ±2.9 pp. PSA: 9 MINT; BGS: 8.5 NM-Mint+ (interpreted); CGC: 9 Mint (interpreted); SGC: 9 Mint (approximate). Lines confirmed by the client. Measure the other face too; a person checked the lines in your application. This is a ceiling from centering alone, not a prediction of the final grade.",
+      "disclaimer": "This is a ceiling from centering alone, not a prediction of the final grade.",
+      "basis": "client-confirmed-lines"
+    },
+    "meta": {
+      "elapsed_ms": 0,
+      "engine_version": "1.0.0"
+    }
+  }
+}

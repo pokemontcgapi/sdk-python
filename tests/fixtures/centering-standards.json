@@ -1,0 +1,93 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json",
+    "cache-control": "private, no-store",
+    "x-credits-cost": "1"
+  },
+  "body": {
+    "data": {
+      "normalizations": [],
+      "standards": [
+        {
+          "house": "PSA",
+          "face": "front",
+          "bands": [
+            {
+              "value": 10,
+              "label": "GEM MT",
+              "loose": 55,
+              "status": "official",
+              "rank": 100
+            },
+            {
+              "value": 9,
+              "label": "MINT",
+              "loose": 60,
+              "status": "official",
+              "rank": 90
+            },
+            {
+              "value": 8,
+              "label": "NM-MT",
+              "loose": 65,
+              "status": "official",
+              "rank": 80
+            },
+            {
+              "value": 7,
+              "label": "NM",
+              "loose": 70,
+              "status": "official",
+              "rank": 70
+            },
+            {
+              "value": 6,
+              "label": "EX-MT",
+              "loose": 80,
+              "status": "official",
+              "rank": 60
+            },
+            {
+              "value": 5,
+              "label": "EX",
+              "loose": 85,
+              "status": "official",
+              "rank": 50
+            },
+            {
+              "value": 3,
+              "label": "VG",
+              "loose": 90,
+              "status": "official",
+              "rank": 30
+            },
+            {
+              "value": 1,
+              "label": "PR",
+              "loose": 100,
+              "status": "official",
+              "rank": 10
+            }
+          ],
+          "source": "https://www.psacard.com/gradingstandards",
+          "sources": [
+            "https://www.psacard.com/gradingstandards"
+          ],
+          "status": "official",
+          "reviewed_at": "2026-10-01",
+          "verification": "retrieved",
+          "note": "Published percentage thresholds. Only the listed centering bands are used; no missing grades are invented."
+        }
+      ],
+      "rounding_rule": "Normalize to the larger percentage. Round to the nearest whole percentage, halves upward. A threshold t passes only when major < t + 0.5; grade with unrounded values. Distances use published thresholds in percentage points, before rounding.",
+      "tag_note": "TAG is excluded because its centering assessment is proprietary and is not represented by these public percentage bands.",
+      "summary": "Centering thresholds for PSA (front), including per-band source status and verification provenance. This is a ceiling from centering alone, not a prediction of the final grade.",
+      "disclaimer": "This is a ceiling from centering alone, not a prediction of the final grade."
+    },
+    "meta": {
+      "elapsed_ms": 0,
+      "engine_version": "1.0.0"
+    }
+  }
+}

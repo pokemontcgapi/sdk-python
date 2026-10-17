@@ -32,6 +32,7 @@ from .resources import (
     ArtistsResource,
     AsyncArtistsResource,
     AsyncCardsResource,
+    AsyncCenteringResource,
     AsyncPricesResource,
     AsyncReferenceResource,
     AsyncSealedResource,
@@ -39,6 +40,7 @@ from .resources import (
     AsyncSetsResource,
     AsyncVisionResource,
     CardsResource,
+    CenteringResource,
     PricesResource,
     ReferenceResource,
     SealedResource,
@@ -92,6 +94,7 @@ class PokemonTcgApi:
         self.prices = PricesResource(self._http)
         self.reference = ReferenceResource(self._http)
         self.vision = VisionResource(self._http)
+        self.centering = CenteringResource(self._http)
 
     @property
     def last_response(self) -> ResponseInfo | None:
@@ -162,6 +165,7 @@ class AsyncPokemonTcgApi:
         self.prices = AsyncPricesResource(self._http)
         self.reference = AsyncReferenceResource(self._http)
         self.vision = AsyncVisionResource(self._http)
+        self.centering = AsyncCenteringResource(self._http)
 
     @property
     def last_response(self) -> ResponseInfo | None:

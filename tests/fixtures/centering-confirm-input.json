@@ -1,0 +1,77 @@
+{
+  "face": "front",
+  "card_size": "standard",
+  "geometry": {
+    "geometry_version": 1,
+    "image": {
+      "width": 800,
+      "height": 960
+    },
+    "corners": [
+      {
+        "x": 315.8617454558488,
+        "y": 67.83480267346181
+      },
+      {
+        "x": 762.5979149161897,
+        "y": 266.73456008206085
+      },
+      {
+        "x": 510.94242471177165,
+        "y": 904.0991827710542
+      },
+      {
+        "x": 10.59791491618978,
+        "y": 681.3314544734233
+      }
+    ],
+    "rectified": {
+      "width": 1100,
+      "height": 1540,
+      "rotations": 0,
+      "corner_offset": 0
+    },
+    "lines": {
+      "cut": {
+        "left": {
+          "intercept": 50,
+          "slope": 0
+        },
+        "right": {
+          "intercept": 1050,
+          "slope": 0
+        },
+        "top": {
+          "intercept": 70,
+          "slope": 0
+        },
+        "bottom": {
+          "intercept": 1470,
+          "slope": 0
+        }
+      },
+      "print": {
+        "left": {
+          "intercept": 103.93710901349633,
+          "slope": 0.00019751289637796478
+        },
+        "right": {
+          "intercept": 1009.4508018061579,
+          "slope": -0.0003453477787005918
+        },
+        "top": {
+          "intercept": 122.4183690110693,
+          "slope": -0.000028588130197583842
+        },
+        "bottom": {
+          "intercept": 1421.6096459626538,
+          "slope": -0.00006294668887282483
+        }
+      }
+    },
+    "card_size": "standard",
+    "warnings": [],
+    "positioning_sigma": 0.86833665661973
+  },
+  "confirmed_by": "person"
+}
