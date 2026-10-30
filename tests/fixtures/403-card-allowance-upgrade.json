@@ -1,0 +1,39 @@
+{
+  "status": 403,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-error-code": "CARD_ALLOWANCE_EXCEEDED",
+    "x-request-id": "00000000000000000000000000000009",
+    "x-cards-limit": "1000",
+    "x-cards-used": "1000"
+  },
+  "body": {
+    "error": {
+      "code": "CARD_ALLOWANCE_EXCEEDED",
+      "message": "Your trial covers up to 1000 distinct cards and this account has already retrieved 1000; this request would add 3 new card(s). Cards you have already retrieved keep answering. Recommended plan: Growth (79.00 EUR/month). https://example.test/subscribe?plan=growth&interval=monthly",
+      "request_id": "00000000000000000000000000000009",
+      "details": {
+        "card_allowance": 1000,
+        "cards_used": 1000,
+        "new_cards": 3,
+        "plan": "FREE",
+        "renews": false,
+        "next_step": {
+          "action": "subscribe",
+          "actor": "account_owner",
+          "plans_url": "https://example.test/pricing",
+          "checkout_url": "https://example.test/subscribe?plan=developer&interval=monthly",
+          "handoff": "The account owner needs to open https://example.test/subscribe?plan=developer&interval=monthly."
+        },
+        "upgrade": {
+          "plan_code": "GROWTH",
+          "plan_name": "Growth",
+          "monthly_cents": 7900,
+          "currency": "EUR",
+          "reason": "card_allowance",
+          "checkout_url": "https://example.test/subscribe?plan=growth&interval=monthly"
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-"""error-mapping-table, error-body-fallback, next-step-accessors."""
+"""error-mapping-table, error-body-fallback, next-step-accessors, upgrade-accessor."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from pokemontcgapi import (
     to_api_error,
 )
 
-from .conftest import Recorder, load_fixture, make_client
+from .conftest import Recorder, fixture_doc, load_fixture, make_client
 
 
 @pytest.mark.parametrize(
@@ -179,3 +179,37 @@ def test_next_step_accessors_from_fixture() -> None:
         client.prices.movers()
     assert excinfo.value.action_url == "https://example.test/account"
     assert excinfo.value.handoff is not None
+
+
+def test_upgrade_accessor() -> None:
+    client = make_client(Recorder(load_fixture("403-card-allowance-upgrade")))
+    with pytest.raises(PermissionDeniedError) as excinfo:
+        client.cards.batch(["bs-4", "bs-5", "bs-6"])
+    error = excinfo.value
+    details = fixture_doc("403-card-allowance-upgrade")["body"]["error"]["details"]
+    assert error.code == "CARD_ALLOWANCE_EXCEEDED"
+    assert error.upgrade == details["upgrade"]
+    assert error.upgrade is not None and error.upgrade["plan_code"] == "GROWTH"
+    assert error.upgrade["monthly_cents"] == 7900 and error.upgrade["reason"] == "card_allowance"
+    assert error.upgrade_url == "https://example.test/subscribe?plan=growth&interval=monthly"
+    # The advice does not replace the hand-off: next_step is still there.
+    assert error.handoff == details["next_step"]["handoff"]
+
+    good: dict[str, Any] = {
+        "plan_code": "GROWTH", "plan_name": "Growth", "monthly_cents": 7900, "currency": "EUR", "reason": "credits"
+    }
+    for malformed in [None, "wrong", {}, {**good, "monthly_cents": "79"}, {**good, "monthly_cents": True},
+                      {**good, "plan_code": 7}, {**good, "checkout_url": 42}]:
+        error = to_api_error(429, {"code": "QUOTA_EXCEEDED", "message": "Exhausted", "details": {"upgrade": malformed}})
+        assert error.upgrade is None, malformed
+        assert error.upgrade_url is None
+    assert to_api_error(429, {"code": "QUOTA_EXCEEDED", "message": "Exhausted"}).upgrade is None
+    manage = to_api_error(
+        403,
+        {"code": "PLAN_REQUIRED", "message": "Denied",
+         "details": {"upgrade": {**good, "manage_url": "https://example.test/account", "role": "alternative"}}},
+    )
+    assert manage.upgrade_url == "https://example.test/account"
+    assert manage.upgrade is not None and manage.upgrade["role"] == "alternative"
+    bare = to_api_error(403, {"code": "PLAN_REQUIRED", "message": "Denied", "details": {"upgrade": good}})
+    assert bare.upgrade_url is None

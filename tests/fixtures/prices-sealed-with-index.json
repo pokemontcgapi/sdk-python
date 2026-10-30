@@ -1,0 +1,56 @@
+{
+  "status": 200,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "x-request-id": "00000000000000000000000000000016",
+    "x-credits-cost": "2",
+    "x-cards-limit": "1000",
+    "x-cards-used": "812",
+    "x-cards-warning": "approaching_limit"
+  },
+  "body": {
+    "data": {
+      "sealed_id": "cn-example-booster-box",
+      "index": {
+        "eur": 128.5,
+        "as_of": "2026-10-29",
+        "sample_n": null,
+        "by_locale": []
+      },
+      "quotes": [
+        {
+          "source": "CARDMARKET",
+          "variant": "LOW",
+          "basis": "ASKING",
+          "amount": 119.9,
+          "currency": "EUR",
+          "locale": "zh",
+          "condition": null,
+          "printing": null,
+          "grading": null,
+          "as_of": "2026-10-29",
+          "sample_n": null,
+          "provenance": "Cardmarket"
+        },
+        {
+          "source": "CARDMARKET",
+          "variant": "TREND",
+          "basis": "ASKING",
+          "amount": 128.5,
+          "currency": "EUR",
+          "locale": "zh",
+          "condition": null,
+          "printing": null,
+          "grading": null,
+          "as_of": "2026-10-29",
+          "sample_n": null,
+          "provenance": "Cardmarket"
+        }
+      ]
+    },
+    "meta": {
+      "quotes": 2,
+      "delayed_hours": 24
+    }
+  }
+}

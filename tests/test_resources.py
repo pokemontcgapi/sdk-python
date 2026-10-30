@@ -184,3 +184,16 @@ def test_route_table_context_manager_and_fixture_dir() -> None:
     with make_client(Recorder(load_fixture("health"))) as client:
         assert isinstance(client, PokemonTcgApi)
         assert client.health()["status"] == "ok"
+
+
+def test_sealed_prices_index() -> None:
+    """A sealed product's prices carry the product's index_eur as ``index`` and the printed language as ``locale``."""
+    recorder = Recorder(load_fixture("prices-sealed-with-index"))
+    client = make_client(recorder)
+    body = client.sealed.prices("cn-example-booster-box")
+    assert recorder.urls == ["https://api.pokemontcgapi.com/v1/sealed/cn-example-booster-box/prices"]
+    assert body["data"]["sealed_id"] == "cn-example-booster-box"
+    index = body["data"]["index"]
+    assert index is not None and index["eur"] == 128.5 and index["sample_n"] is None and index["by_locale"] == []
+    assert [q["locale"] for q in body["data"]["quotes"]] == ["zh", "zh"]
+    assert body["meta"]["quotes"] == 2

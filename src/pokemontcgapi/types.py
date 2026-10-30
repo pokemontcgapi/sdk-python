@@ -280,6 +280,10 @@ class SealedProduct(TypedDict):
     image_url: str | None
     release_date: str | None
     pack_count: int | None
+    #: The languages the product physically exists in (``en``, ``ja``, ``zh``, ...), not those of its
+    #: name; empty where the catalogue does not hold them. The Simplified Chinese sealed line (273
+    #: products on 2026-10-30, ``cn-*`` sets) carries ``["zh"]``. The list has no language filter: read
+    #: it here, and pass ``set`` to narrow to one set when you know it.
     languages: list[str]
     #: On lists only with ``include=["index"]``; on the single product always.
     index_eur: NotRequired[float | None]
@@ -315,7 +319,11 @@ class CardPrices(TypedDict):
 
 class SealedPrices(TypedDict):
     sealed_id: str
+    #: The product's catalogue price (the same ``index_eur`` as on the product row) with its date;
+    #: ``sample_n`` is None and ``by_locale`` empty, because it is not the card composite. ``None``
+    #: when the product has none.
     index: PriceIndex | None
+    #: Every row carries ``locale``: the language the box is printed in (``zh`` on the Chinese line).
     quotes: list[Price]
 
 
@@ -486,8 +494,8 @@ class VisionCandidate(TypedDict):
     index_eur: NotRequired[float | None]
     last_price_at: NotRequired[str | None]
     prices: NotRequired[list[Price]]
-    #: Hamming distance, 0..512. Real matches sit below 150 even on a noisy photo; nothing above 170
-    #: is returned.
+    #: Distance on a common 0..512 scale, lower is closer: signature Hamming distance or
+    #: round(cosine distance x 340), clamped to 0..512, for embeddings. Nothing above 170 is returned.
     distance: int
     #: The same information rescaled to 0..1. Convenient, not more informative.
     confidence: float

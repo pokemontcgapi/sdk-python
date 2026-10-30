@@ -190,6 +190,40 @@ def main() -> None:
     )
     write("vision-ambiguous", 200, {**J, "x-request-id": rid(30), "x-credits-cost": "25"},
           sample('  "data": \\{\n    "decision": "ambiguous"'))
+    # Sintetiche dal contratto del Go (goapi/internal/prices/handler_sealed.go e
+    # goapi/internal/handoff/upgrade.go): la lettura dal vivo non era possibile
+    # da questa macchina il 2026-10-30. La forma e' deterministica; i numeri no.
+    def zh_quote(variant: str, amount: float) -> dict:
+        return {"source": "CARDMARKET", "variant": variant, "basis": "ASKING", "amount": amount, "currency": "EUR",
+                "locale": "zh", "condition": None, "printing": None, "grading": None, "as_of": "2026-10-29",
+                "sample_n": None, "provenance": "Cardmarket"}
+
+    write(
+        "prices-sealed-with-index", 200,
+        {**J, "x-request-id": rid(22), "x-credits-cost": "2", "x-cards-limit": "1000", "x-cards-used": "812",
+         "x-cards-warning": "approaching_limit"},
+        {"data": {"sealed_id": "cn-example-booster-box",
+                  "index": {"eur": 128.5, "as_of": "2026-10-29", "sample_n": None, "by_locale": []},
+                  "quotes": [zh_quote("LOW", 119.9), zh_quote("TREND", 128.5)]},
+         "meta": {"quotes": 2, "delayed_hours": 24}},
+    )
+    write(
+        "403-card-allowance-upgrade",
+        403,
+        {**J, "x-error-code": "CARD_ALLOWANCE_EXCEEDED", "x-request-id": rid(9), "x-cards-limit": "1000",
+         "x-cards-used": "1000"},
+        {"error": {"code": "CARD_ALLOWANCE_EXCEEDED",
+                   "message": "Your trial covers up to 1000 distinct cards and this account has already retrieved 1000; "
+                              "this request would add 3 new card(s). Cards you have already retrieved keep answering. "
+                              "Recommended plan: Growth (79.00 EUR/month). "
+                              "https://example.test/subscribe?plan=growth&interval=monthly",
+                   "request_id": rid(9),
+                   "details": {"card_allowance": 1000, "cards_used": 1000, "new_cards": 3, "plan": "FREE",
+                               "renews": False, "next_step": subscribe,
+                               "upgrade": {"plan_code": "GROWTH", "plan_name": "Growth", "monthly_cents": 7900,
+                                           "currency": "EUR", "reason": "card_allowance",
+                                           "checkout_url": "https://example.test/subscribe?plan=growth&interval=monthly"}}}},
+    )
     write(
         "changes-page", 200, {**J, "x-request-id": rid(40), "x-credits-cost": "1"},
         {"data": [{"id": 43, "kind": "CARD", "entity_id": "bs-4", "op": "UPDATE", "version": 7,

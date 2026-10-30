@@ -68,6 +68,10 @@ class ResponseInfo:
     #: when ``cards_used`` is at the limit and the request would add new cards.
     cards_limit: int | None = None
     cards_used: int | None = None
+    #: ``X-Cards-Warning``: ``"approaching_limit"`` on a successful response once ``cards_used`` has
+    #: reached 80% of the allowance; ``None`` otherwise, and always where there is no allowance. The
+    #: raw header value, so a new value arrives instead of vanishing into a boolean.
+    cards_warning: str | None = None
 
 
 def _header_number(headers: httpx.Headers, name: str) -> int | None:
@@ -102,6 +106,7 @@ def response_info(url: str, response: httpx.Response) -> ResponseInfo:
         trial_expires_at=headers.get("x-trial-expires-at"),
         cards_limit=_header_number(headers, "x-cards-limit"),
         cards_used=_header_number(headers, "x-cards-used"),
+        cards_warning=headers.get("x-cards-warning") or None,
     )
 
 

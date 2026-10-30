@@ -47,6 +47,28 @@ class NextStep(TypedDict):
     handoff: str
 
 
+class UpgradeSuggestion(TypedDict):
+    """The commercial advice attached to a refusal (``details.upgrade``, since 2026-10-05): the cheapest
+    plan that would have let the request through, with its list price and the link to subscribe. It is
+    advice and does not change the outcome: ``next_step`` remains the hand-off to the account owner."""
+
+    plan_code: str
+    plan_name: str
+    #: Monthly list price, in cents of ``currency``.
+    monthly_cents: int
+    currency: str
+    #: Why this plan: ``credits``, ``daily_cap``, ``card_allowance``, ``trial_expired``, ``history``,
+    #: ``vision``, ``centering``, ``movers``, ``graded_quotes``, ``all_locales``, ``api_keys``,
+    #: ``subscription_required``.
+    reason: str
+    #: For an account without a subscription yet.
+    checkout_url: NotRequired[str]
+    #: For an account that already has one: the plan changes from the portal.
+    manage_url: NotRequired[str]
+    #: ``alternative`` when the advice accompanies an offer that remains the main path.
+    role: NotRequired[str]
+
+
 class ApiErrorBody(TypedDict):
     code: str
     message: str
@@ -115,6 +137,35 @@ class PokemonTcgApiError(Exception):
     def handoff(self) -> str | None:
         step = self.next_step
         return step["handoff"] if step else None
+
+    @property
+    def upgrade(self) -> UpgradeSuggestion | None:
+        """``details.upgrade`` when it is well formed, else ``None``; never a piece of it."""
+        details = self.details
+        value = details.get("upgrade") if details else None
+        if not isinstance(value, dict):
+            return None
+        if (
+            not isinstance(value.get("plan_code"), str)
+            or not isinstance(value.get("plan_name"), str)
+            or not isinstance(value.get("monthly_cents"), int)
+            or isinstance(value.get("monthly_cents"), bool)
+            or not isinstance(value.get("currency"), str)
+            or not isinstance(value.get("reason"), str)
+        ):
+            return None
+        for key in ("checkout_url", "manage_url", "role"):
+            if key in value and not isinstance(value[key], str):
+                return None
+        return value  # type: ignore[return-value]
+
+    @property
+    def upgrade_url(self) -> str | None:
+        """The link of the advice: ``checkout_url``, or ``manage_url`` for an account already subscribed."""
+        upgrade = self.upgrade
+        if upgrade is None:
+            return None
+        return upgrade.get("checkout_url") or upgrade.get("manage_url")
 
 
 class AuthenticationError(PokemonTcgApiError):

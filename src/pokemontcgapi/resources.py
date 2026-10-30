@@ -123,7 +123,9 @@ def _image_payload(image: bytes | bytearray | IO[bytes] | os.PathLike[str] | str
     return {"image": ("card", data, "application/octet-stream")}
 
 
-def _identify_fields(top_k: int | None, set: str | None, region: PrintRegion | None, include: str | None) -> dict[str, str]:  # noqa: A002
+def _identify_fields(
+    top_k: int | None, set: str | None, region: PrintRegion | None, include: str | None  # noqa: A002
+) -> dict[str, str]:
     fields: dict[str, str] = {}
     if top_k is not None:
         fields["top_k"] = str(top_k)
@@ -295,8 +297,9 @@ class SealedResource:
         variant: str | None = None,
         locale: str | None = None,
     ) -> SealedPricesResponse:
-        """Current prices of a product. 2 credits. The composite index does not cover sealed
-        products: ``index`` is ``None``."""
+        """Current prices of a product. 2 credits. ``index`` is the product's ``index_eur`` with its
+        date, or ``None`` when it has none; every row carries ``locale``, the language the box is
+        printed in (``zh`` on the Simplified Chinese line)."""
         params = _price_filter_params(source, variant, locale)
         return cast(SealedPricesResponse, self._http.get(f"/v1/sealed/{_p(id)}/prices", params))
 
@@ -583,6 +586,9 @@ class AsyncSealedResource:
         variant: str | None = None,
         locale: str | None = None,
     ) -> SealedPricesResponse:
+        """Current prices of a product. 2 credits. ``index`` is the product's ``index_eur`` with its
+        date, or ``None`` when it has none; every row carries ``locale``, the language the box is
+        printed in (``zh`` on the Simplified Chinese line)."""
         params = _price_filter_params(source, variant, locale)
         return cast(SealedPricesResponse, await self._http.get(f"/v1/sealed/{_p(id)}/prices", params))
 

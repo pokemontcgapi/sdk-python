@@ -20,6 +20,7 @@ from .errors import (
     ServerError,
     TrialExpiredError,
     UpgradeRequiredError,
+    UpgradeSuggestion,
     to_api_error,
 )
 from .types import (
@@ -190,6 +191,7 @@ __all__ = [
     "Translation",
     "TrialExpiredError",
     "UpgradeRequiredError",
+    "UpgradeSuggestion",
     "VisionCandidate",
     "VisionDecision",
     "VisionResponse",

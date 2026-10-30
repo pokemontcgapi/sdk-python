@@ -75,6 +75,7 @@ def test_response_info() -> None:
         trial_expires_at="2026-10-18T09:00:00Z",
         cards_limit=1000,
         cards_used=37,
+        cards_warning=None,
     )
 
     client = make_client(Recorder(ok({}, **{"x-credits-cost": "n/a", "x-quota-limit": "12.0", "x-plan-withheld": ""})))
@@ -85,6 +86,17 @@ def test_response_info() -> None:
     assert client.last_response.plan_withheld == ()
     assert client.last_response.cards_limit is None
     assert client.last_response.cards_used is None
+
+    # X-Cards-Warning travels raw; an empty header is the same as none.
+    client = make_client(Recorder(load_fixture("prices-sealed-with-index")))
+    client.sealed.prices("cn-example-booster-box")
+    assert client.last_response is not None
+    assert client.last_response.cards_warning == "approaching_limit"
+    assert client.last_response.cards_used == 812
+    client = make_client(Recorder(ok({"status": "ok"}, **{"x-cards-warning": ""})))
+    client.health()
+    assert client.last_response is not None
+    assert client.last_response.cards_warning is None
 
 
 def test_on_response_called_on_errors() -> None:
