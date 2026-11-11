@@ -2,7 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/pokemontcgapi)](https://pypi.org/project/pokemontcgapi/) [![license](https://img.shields.io/pypi/l/pokemontcgapi)](./LICENSE) [![CI](https://github.com/pokemontcgapi/sdk-python/actions/workflows/ci.yml/badge.svg)](https://github.com/pokemontcgapi/sdk-python/actions/workflows/ci.yml)
 
-Python client for the Pokémon TCG API at [pokemontcgapi.com](https://pokemontcgapi.com): cards,
+Python client for the Pokémon TCG API at [pokemontcgapi.com](https://pokemontcgapi.com/?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python): cards,
 sets, illustrators, the reference vocabularies and photo recognition, across three print lines,
 international, Japanese and Simplified Chinese, with card names in eight locales, images, and prices
 that state their source, basis, grade and sample size. The current counts are live at
@@ -40,11 +40,11 @@ Lost the response? Repeat the exact same request (same Idempotency-Key, same bod
 
 We store only a hash of the key; the signup response is kept for 24 hours so the same request can be replayed. Save `data.key.secret` now.
 
-If replay is unavailable, [sign in](https://pokemontcgapi.com/account) and rotate the key, or use /v1/accounts/recover with an already verified email to get a new secret.
+If replay is unavailable, [sign in](https://pokemontcgapi.com/account?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python) and rotate the key, or use /v1/accounts/recover with an already verified email to get a new secret.
 
 The key comes back in `data.key.secret`. Confirming the address we email raises the trial from
 80 to 800 credits, and the trial ends 30 days after signup. Paid plans start at 29 EUR a month:
-[pricing](https://pokemontcgapi.com/pricing).
+[pricing](https://pokemontcgapi.com/pricing?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python).
 
 ## Install
 
@@ -100,8 +100,8 @@ have different credit costs. `lang` selects a name translation, not a print regi
 Use `client.sets.list(region="JP", limit=250)` to browse set metadata and
 `client.sets.cards("obf", limit=250)` when you need one particular set. For all cards,
 the flat list uses fewer requests than a card loop for every set. The
-[quickstart](https://pokemontcgapi.com/docs/quickstart#page-the-whole-catalogue) includes dated
-measurements, and the [migration guide](https://pokemontcgapi.com/docs/migrate-from-pokemontcg-io)
+[quickstart](https://pokemontcgapi.com/docs/quickstart?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python#page-the-whole-catalogue) includes dated
+measurements, and the [migration guide](https://pokemontcgapi.com/docs/migrate-from-pokemontcg-io?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python)
 explains capturing the change feed watermark before an import and keeping the replica current.
 
 The cursor carries a signature of the sort order, so it must never be reconstructed by hand — the SDK
@@ -228,7 +228,7 @@ Validation is `INVALID_PARAMETER`; service validation carries `details.service_c
 `details.param`. `PROVIDER_UNAVAILABLE` (503, Retry-After: 2) and `FEATURE_NOT_CONFIGURED` (503)
 indicate unavailable processing or a disabled deployment; `PLAN_REQUIRED` (403) indicates a plan,
 verification or trial-call restriction. Errors refund credits and trial reservations. POSTs are
-never retried by the SDK. See the [two-step guide](https://pokemontcgapi.com/docs/centering).
+never retried by the SDK. See the [two-step guide](https://pokemontcgapi.com/docs/centering?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python).
 
 ### Errors you can branch on
 
@@ -383,8 +383,8 @@ while True:
 - **TypeScript SDK**: [`@pokemontcgapi/sdk`](https://www.npmjs.com/package/@pokemontcgapi/sdk) — [source](https://github.com/pokemontcgapi/sdk-typescript)
 - **Go SDK**: `go get github.com/pokemontcgapi/sdk-go` — [source](https://github.com/pokemontcgapi/sdk-go)
 - **MCP server** for agents: [`@pokemontcgapi/mcp`](https://www.npmjs.com/package/@pokemontcgapi/mcp) — [source](https://github.com/pokemontcgapi/mcp-server)
-- **Docs**: <https://pokemontcgapi.com/docs>
-- **Coverage, measured live**: <https://pokemontcgapi.com/coverage>
+- **Docs**: [pokemontcgapi.com/docs](https://pokemontcgapi.com/docs?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python)
+- **Coverage, measured live**: [pokemontcgapi.com/coverage](https://pokemontcgapi.com/coverage?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python)
 
 ## Build from source
 
@@ -401,13 +401,13 @@ against the real API (about four credits). CI enforces lint, types and the suite
 Python, and that the built wheel installs and imports in a clean environment.
 
 This package is developed inside the private monorepo that runs
-[pokemontcgapi.com](https://pokemontcgapi.com) and mirrored here on each release,
+[pokemontcgapi.com](https://pokemontcgapi.com/?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python) and mirrored here on each release,
 so a merged pull request travels back by hand rather than by merge button. That
 is not a reason to send patches elsewhere — open the issue or the PR here, it is
 the address that gets read. The prose of this README is kept identical to the TypeScript SDK's
-(synced from its README as of commit eb0b38b); only the code differs.
+(synced from its README as of commit f2b8dec); only the code differs.
 
 ## Licence
 
 MIT. Data served by the API carries per-source redistribution terms — see
-<https://pokemontcgapi.com/legal/attribution>.
+[pokemontcgapi.com/legal/attribution](https://pokemontcgapi.com/legal/attribution?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python).
