@@ -23,6 +23,11 @@ their respective owners.
 
 ## Get a key
 
+In a browser: [pokemontcgapi.com/free-api-key](https://pokemontcgapi.com/free-api-key?utm_source=pypi&utm_medium=readme&utm_campaign=sdk_python&utm_content=get_key)
+shows a real response next to the signup form and gives you the key on the spot, with no payment
+card. If you already know the plan you need, pick it on the same page: save your key, then select
+Continue to checkout. From a terminal, use the request below.
+
 Generate the Idempotency-Key once per signup and keep it with the request body:
 
 ```bash
@@ -405,7 +410,7 @@ This package is developed inside the private monorepo that runs
 so a merged pull request travels back by hand rather than by merge button. That
 is not a reason to send patches elsewhere — open the issue or the PR here, it is
 the address that gets read. The prose of this README is kept identical to the TypeScript SDK's
-(synced from its README as of commit f2b8dec); only the code differs.
+(synced from its README as of commit 7c7c956); only the code differs.
 
 ## Licence
 
