@@ -28,7 +28,11 @@ Locale = Literal["en", "fr", "de", "ja", "it", "es", "pt", "zh"]
 #: empty page, not an error.
 PrintRegion = Literal["WEST", "JP", "CN", "KR"]
 
-PriceSource = Literal["TCGPLAYER", "PRICECHARTING", "CARDMARKET", "CARDTRADER", "EBAY", "PTCG_INDEX", "COMMUNITY"]
+#: ``EBAY`` rows are medians of active listings (``basis`` ``ASKING``); ``EBAY_SOLD`` rows are
+#: medians of completed sales (``basis`` ``SOLD``). Both are graded rows, one per company and grade.
+PriceSource = Literal[
+    "TCGPLAYER", "PRICECHARTING", "CARDMARKET", "CARDTRADER", "EBAY", "EBAY_SOLD", "PTCG_INDEX", "COMMUNITY"
+]
 
 #: ``DERIVED`` is computed by us; ``GUIDE`` is a value published upstream.
 PriceBasis = Literal["GUIDE", "DERIVED", "SOLD", "ASKING"]
